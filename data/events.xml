@@ -34,9 +34,9 @@
         <details><![CDATA[Philippe-Chatrier Court Paris, FRA]]></details>
     </event>
 
-    <event id='1000000' start_date='2017-10-30 08:30' end_date='2017-10-30 9:30' text='Reunion importante by jin' details='en la UAGRM'/>
-    <event id='1000001' start_date='2017-10-30 09:00' end_date='2017-10-30 10:00' text='Junta de venta' details='software'/>
-    <event id='1000002' start_date='2017-10-30 09:15' end_date='2017-10-30 10:15' text='Junte de promos Heroes del chaco' details='promo 2013'/>
+    <event id='1000000' start_date='2017-10-30 08:30' end_date='2017-10-30 9:30' text='Reunion importante by jin' details='en la UAGRM' color='red'/>
+    <event id='1000001' start_date='2017-10-30 09:00' end_date='2017-10-30 10:00' text='Junta de venta' details='software' color="green"/>
+    <event id='1000002' start_date='2017-10-30 09:15' end_date='2017-10-30 10:15' text='Junte de promos Heroes del chaco' details='promo 2013' color="#BC996F"/>
     <event id='1000003' start_date='2017-10-30 12:00' end_date='2017-10-30 13:30' text='Desde el amanecer' details='en la mañana'/>
     <event id='1000004' start_date='2017-10-30 11:00' end_date='2017-10-30 12:30' text='Cumpleaños de Nicol' details='evento realizado todo el año'/>
 </data>
