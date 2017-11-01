@@ -26,13 +26,5 @@ function doOnload() {
     scheduler.init('scheduler_here',new Date(2017,9,30),"week");
     scheduler.load("./data/events.xml");
 
-    var calendar = scheduler.renderCalendar({
-        container:"cal_here",
-        navigation:true,
-        handler:function(date){
-            scheduler.setCurrentView(date, scheduler._mode);
-        }
-    });
-    scheduler.linkCalendar(calendar);
-    scheduler.setCurrentView(scheduler._date, scheduler._mode);
+
 }

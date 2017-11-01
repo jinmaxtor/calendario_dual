@@ -12,12 +12,117 @@
 
     <script src="js/metodos.js"></script>
 
+    <style>
+        #layout-header {
+            width: 100%;
+            display: block;
+            position: fixed;
+            z-index: 1000;
+            box-sizing: content-box;
+            border-bottom: solid 1px #0b4170;
+            border-top: solid 1px #0b4170;
+            background: #1578c9;
+            background: -moz-linear-gradient(top, #1578c9 0%, #0b66b1 100%);
+            background: -webkit-gradient(left top, left bottom, color-stop(0%, #1578c9), color-stop(100%, #0b66b1));
+            background: -webkit-linear-gradient(top, #1578c9 0%, #0b66b1 100%);
+            background: -o-linear-gradient(top, #1578c9 0%, #0b66b1 100%);
+            background: -ms-linear-gradient(top, #1578c9 0%, #0b66b1 100%);
+            background: linear-gradient(to bottom, #1578c9 0%, #0b66b1 100%);
+            -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.4);
+            -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.4);
+            box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.4);
+        }
 
+        .Unselectable {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .fontRegular {
+            font-family: 'titillium_webregular' !important;
+        }
+
+        div {
+            display: block;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        #layout-logo {
+            width: auto;
+            margin-bottom: -2px;
+            padding: 0px;
+            margin: 18px;
+            float: left;
+            line-height: 16px;
+        }
+
+        .Fs14 {
+            font-size: 14px !important;
+        }
+
+        .layout-header-widgets {
+            margin: 0px;
+            padding: 0px;
+            position: absolute;
+            right: 10px;
+            top: 6px;
+        }
+
+        .white {
+            color: #ffffff;
+        }
+    </style>
 
 <body onload="doOnload()">
 
+
+    <div id="layout-header" class="Unselectable fontRegular">
+        <a id="layout-logo"><img src="/dual.support/javax.faces.resource/images/LOGO.svg.xhtml?ln=sentinel-layout" class="Fleft" />
+            <span class="Fs19 FontTitilliumSemiBoldItalic Fleft"><span class="softblue">DUAL</span><span class="hardblue"> SUPPORT</span></span>
+            <i class="icon-user yellow Fleft" style="margin-left: 10px"></i>
+            <span class="Fs19 FontTitilliumSemiBoldItalic Fleft"><span class="softblue"> HAROLD MALDONADO</span></span>
+        </a><div id="j_idt22" class="ui-outputpanel ui-widget">
+        <ul id="sm-topmenu" class="layout-header-widgets white Fs14">
+            <li class="Fleft BordRadHalf TexAlCenter DispNone"><i class="icon-chat Fs16"></i><span class="alertBubble BordRad10 Fs10"><div id="topbar_total" class="ui-outputpanel ui-widget">0</div></span>
+                <ul class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
+                    <li class="Animated05"><a href="/dual.support/view/client-ticket.xhtml" class="white Unselectable TexAlRight"><i class="icon-comment yellow Fs18"></i>TICKET<br /><span class="Fs12"><span class="alertBubble2"><div id="topbar_ticket" class="ui-outputpanel ui-widget">0</div></span>Debates no leidos</span></a></li>
+                    <li class="Animated05 DispNone"><a href="/dual.support/view/user-desarrollo.xhtml" class="white Unselectable TexAlRight"><i class="icon-comment Fs18"></i>DESARROLLO<br /><span class="Fs12"><span class="alertBubble2"><div id="topbar_desarrollo" class="ui-outputpanel ui-widget">0</div></span>Debates no leidos.</span></a></li>
+                </ul>
+            </li>
+            <li class="Fleft BordRadHalf TexAlCenter"><i class="icon-user-male"></i>
+                <ul class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
+                    <li class="Animated05"><a href="/dual.support/view/my-profile.xhtml" class="white Unselectable"><i class="icon-user-male Fs26 OvHidden"></i><span class="Fs18">HAROLD MALDONADO<br /><span class="Fs10">ADMINISTRADOR</span></span></a></li>
+                    <li class="Animated05"><a href="/dual.support/view/my-password.xhtml" class="white Unselectable"><i class="icon-key"></i>Cambiar Contraseña</a></li>
+                    <li class="Animated05"><a href="/dual.support/LogoutServlet" class="white Unselectable"><i class="icon-logout"></i>Cerrar Sesion</a></li>
+                </ul>
+            </li>
+        </ul></div>
+        <!-- NEVER REMOVE FOLLOWING 'UL' TAG ! BECAUSE THIS CONTAINS RESPONSIVE MODE HEADER MENU OPEN-CLOSE BUTTON -->
+        <ul id="sm-mobiletopmenu" class="layout-header-widgets white Fs14">
+            <li class="Fleft BordRadHalf TexAlCenter Animated05 DisplayOnResponsive"><i class="icon-th-1"></i></li>
+        </ul>
+        <!-- ****** -->
+    </div>
+
+
+
+
+
+
+
+
+
+
     <div style='float: left; padding:10px;'>
-        <div id="cal_here" style='width:250px;'></div>
+        <div id="cal_here" style='width:500px;'></div>
     </div>
     <div id="scheduler_here" class="dhx_cal_container" style='width:auto; height:100%;'>
         <div class="dhx_cal_navline">
