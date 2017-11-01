@@ -6099,7 +6099,7 @@ scheduler.form_blocks={
 				s[map[0]].disabled=input.checked;
 				s[ map[0] + s.length/2 ].disabled=input.checked;
 
-				input.onclick = function(){ 
+				input.onclick = function(){
 					if(input.checked) {
 						var obj = {};
 						scheduler.form_blocks.time.get_value(node,obj,config);
