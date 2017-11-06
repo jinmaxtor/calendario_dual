@@ -68,10 +68,10 @@ function mover() {
                 //add it to the scheduler
 
                 scheduler.addEvent(evento);
-                scheduler.showLightbox(evento.id);
+                //scheduler.showLightbox(evento.id);
 
 
-                scheduler.endLightbox(false);
+                //scheduler.endLightbox(false);
 
 
             } else {
@@ -96,7 +96,7 @@ function iniciarCalendario() {
     scheduler.xy.min_event_height = 30; //define  duracion minima que debe tener un evento (en minutos)
     scheduler.config.time_step = 30; // define el tiempo de variacion de un evento. (PRECISION).(en minutos).
     scheduler.config.limit_time_select = true; // define los limites de hora en las opciones de la ventana de detalles de evento
-    scheduler.config.details_on_dblclick = true; // define si se mostrará la ventana de detalles de evento al dar doble clic en el evento.
+    scheduler.config.details_on_dblclick = false; // define si se mostrará la ventana de detalles de evento al dar doble clic en el evento. si esta en falso al hacer doble clic solo hara F2
     scheduler.config.details_on_create = true; // define si se mostrará la ventana de detalles de evento al crearlo.
     scheduler.config.check_limits = true;
     scheduler.config.separate_short_events = true; // forza la separacion de eventos cercanos
@@ -130,9 +130,11 @@ function iniciarCalendario() {
             return date;
         };
 
+        /*
         scheduler.attachEvent("onClick", function(id, e){
             scheduler.showLightbox(id);
         });
+        */
 
         var marked = null;
         var marked_date = null;
