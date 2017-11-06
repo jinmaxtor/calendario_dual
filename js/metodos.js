@@ -4,6 +4,27 @@ function init() {
     scheduler.load("./data/events.xml");
 };
 
+function retornarColor(nombreEvento) {
+    var colores = ["#0176BC", "#627D4D", "#F7931E", "#2EBDEF", "#662D91", "#DB00C5"];
+    var color = null;
+    switch (nombreEvento){
+        case "REUNION": color = colores[0];
+            break;
+        case "CAPACITACION": color = colores[1];
+            break;
+        case "PRESENTACIÓN": color = colores[2];
+            break;
+        case "REUNION DEL DIRECTORIO": color = colores[3];
+            break;
+        case "VISITA": color = colores[4];
+            break;
+        case "CAMBIO VERSION": color = colores[5];
+            break;
+    }
+
+    return color;
+}
+
 
 
 function inicializar() {
@@ -13,57 +34,55 @@ function inicializar() {
 
 
 function mover() {
-
-
-
-
-
     $( ".external-event" ).draggable({
-
-
         //helper: "clone",
         //opacity: 0.35,
         stack: ".external-event",
-        revert: "invalid",
+        revert: true,
+        revertDuration: 0,
+        //zIndex: 999,
         drag: function () {
-            d = $(this);
-        },
+            evento_panel = $(this);
+        }
 
+    });
 
-
-        stop: function( event, ui ) {
-            alert(event.target.innerHTML);
-            var drop = scheduler.getActionData(event),
+    $("#poner").droppable({
+        accept: ".external-event",
+        tolerance: "intersect",
+        drop: function () {
+            var evento_atrapado = scheduler.getActionData(event),
                 node = event.target || event.srcElement;
-            //node is dropped on a valid scheduler date
-            if(drop.date){
-                //create new event
+
+            // si
+            if(evento_atrapado.date){
+                //se crea el nuevo evento
                 var evento = {
                     text : node.innerHTML,
-                    start_date : drop.date,
-                    end_date : scheduler.date.add(drop.date, duracion, 'minute')
+                    start_date : evento_atrapado.date,
+                    end_date : scheduler.date.add(evento_atrapado.date, duracion, 'minute'),
+                    color: retornarColor(node.innerHTML)
                 };
 
                 //add it to the scheduler
+
                 scheduler.addEvent(evento);
+                scheduler.showLightbox(evento.id);
+
+
+                scheduler.endLightbox(false);
+
+
             }
+
         }
+
     });
-
-
-
-
-
 }
 
 duracion = 120;
 
 function iniciarCalendario() {
-
-
-
-
-
 
 // CONFIGURACIÓN
     scheduler.config.mark_now = true;
@@ -90,23 +109,66 @@ function iniciarCalendario() {
 
 
 
-
-
     scheduler.attachEvent("onMouseMove", function(id, ev){
         var obj = scheduler.getActionData(ev);
         console.log(obj.section)
         document.getElementById('log').innerHTML = "Click at "+obj.date+"<br>section:"+obj.section;
-    })
+    });
 
 
+    scheduler.attachEvent("onTemplatesReady", function() {
+        var fix_date = function(date) {  // 17:48:56 -> 17:30:00
+            date = new Date(date);
+            if (date.getMinutes() > 30)
+                date.setMinutes(30);
+            else
+                date.setMinutes(0);
+            date.setSeconds(0);
+            return date;
+        };
 
+        scheduler.attachEvent("onClick", function(id, e){
+            scheduler.showLightbox(id);
+        });
 
+        var marked = null;
+        var marked_date = null;
+        var event_step = 120;
+        scheduler.attachEvent("onEmptyClick", function(date, native_event){
+            scheduler.unmarkTimespan(marked);
+            marked = null;
 
+            var fixed_date = fix_date(date);
+            scheduler.addEventNow(fixed_date, scheduler.date.add(fixed_date, event_step, "minute"));
+        });
 
+        scheduler.attachEvent("onMouseMove", function(event_id, native_event) {
+            var date = scheduler.getActionData(native_event).date;
+            var fixed_date = fix_date(date);
 
+            if (+fixed_date != +marked_date) {
+                scheduler.unmarkTimespan(marked);
+
+                marked_date = fixed_date;
+                marked = scheduler.markTimespan({
+                    start_date: fixed_date,
+                    end_date: scheduler.date.add(fixed_date, event_step, "minute"),
+                    css: "highlighted_timespan"
+                });
+            }
+        });
+
+    });
 
 
 // INICIALIZACIÓN Y CARGA
     scheduler.init('calendario',new Date(2017,9,30),"week");// inicia el calendario
-    scheduler.load("./data/events.xml"); // carga los datos desde archivo
+    scheduler.parse([
+        {start_date: "2017-10-30 08:30", end_date: "2017-10-30 9:30", text: "Reunion importante by jin", details: "en la UAGRM", color: "red"},
+        {start_date: "2017-10-30 09:00", end_date: "2017-10-30 10:00", text: "Junta de venta", details: "software", color: "green"},
+        {start_date: "2017-10-30 09:15", end_date: "2017-10-30 10:15", text: "Junte de promos Heroes del chaco", details: "promo 2013", color: "#BC996F"},
+        {start_date: "2017-10-30 12:00", end_date: "2017-10-30 13:30", text: "Desde el amanecer", details: "en la mañana"},
+        {start_date: "2017-10-30 11:00", end_date: "2017-10-30 12:30", text: "Cumpleaños de Nicol", details: "evento realizado todo el año"}
+    ], "json");
+    //scheduler.load("./data/events.xml"); // carga los datos desde archivo
 }
