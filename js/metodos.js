@@ -54,7 +54,8 @@ function mover() {
             var evento_atrapado = scheduler.getActionData(event),
                 node = event.target || event.srcElement;
 
-            // si
+            alert(evento_atrapado.date);
+            // si el evento es valido
             if(evento_atrapado.date){
                 //se crea el nuevo evento
                 var evento = {
@@ -73,6 +74,8 @@ function mover() {
                 scheduler.endLightbox(false);
 
 
+            } else {
+                alert("invalido");
             }
 
         }
