@@ -28,12 +28,21 @@ function retornarColor(nombreEvento) {
 
 
 function inicializar() {
-    mover();
+    sacar_poner();
     iniciarCalendario();
 }
 
+function fecha_to_FechaStr(date) {
+    var fun = scheduler.date.date_to_str("%d/%m/%Y");
+    return  fun(date);
+}
 
-function mover() {
+function fecha_to_HoraStr(date) {
+    var fun = scheduler.date.date_to_str("%H:%i:%s");
+    return  fun(date);
+}
+
+function sacar_poner() {
     $( ".external-event" ).draggable({
         //helper: "clone",
         //opacity: 0.35,
@@ -49,28 +58,39 @@ function mover() {
 
     $("#poner").droppable({
         accept: ".external-event",
-        tolerance: "intersect",
+        //tolerance: "intersect",
         drop: function () {
             var evento_atrapado = scheduler.getActionData(event),
                 node = event.target || event.srcElement;
 
-            alert(evento_atrapado.date);
+
+
             // si el evento es valido
             if(evento_atrapado.date){
+
+
+                var fecha = fecha_to_FechaStr(evento_atrapado.date);
+                var hora = fecha_to_HoraStr(evento_atrapado.date);
+                alert(fecha + " " + hora);
+
+
                 //se crea el nuevo evento
                 var evento = {
                     text : node.innerHTML,
                     start_date : evento_atrapado.date,
                     end_date : scheduler.date.add(evento_atrapado.date, duracion, 'minute'),
                     color: retornarColor(node.innerHTML)
+                    //atributo1: valor1,
+                    //atributo2: valor2,
+                    //atributoN: valorN
                 };
 
-                //add it to the scheduler
+                //se añade el evento al calendario
 
-                scheduler.addEvent(evento);
+                var id_evento = scheduler.addEvent(evento);
+                var eve = scheduler.getEvent(id_evento);
+                console.log(eve);
                 //scheduler.showLightbox(evento.id);
-
-
                 //scheduler.endLightbox(false);
 
 
@@ -90,7 +110,7 @@ function iniciarCalendario() {
 // CONFIGURACIÓN
     scheduler.config.mark_now = true;
     scheduler.config.multi_day = true;
-    scheduler.config.xml_date="%Y-%m-%d %H:%i";
+    scheduler.config.xml_date="%Y-%m-%d %H:%i"; //
     scheduler.config.first_hour = 8; // Hora de inicio del calendario
     scheduler.config.last_hour = 21; // Hora de finalizacion del calendario
     scheduler.xy.min_event_height = 30; //define  duracion minima que debe tener un evento (en minutos)
@@ -119,6 +139,7 @@ function iniciarCalendario() {
     });
 
 
+    /*
     scheduler.attachEvent("onTemplatesReady", function() {
         var fix_date = function(date) {  // 17:48:56 -> 17:30:00
             date = new Date(date);
@@ -130,11 +151,8 @@ function iniciarCalendario() {
             return date;
         };
 
-        /*
-        scheduler.attachEvent("onClick", function(id, e){
-            scheduler.showLightbox(id);
-        });
-        */
+
+        //scheduler.attachEvent("onClick", function(id, e){scheduler.showLightbox(id);});
 
         var marked = null;
         var marked_date = null;
@@ -164,6 +182,7 @@ function iniciarCalendario() {
         });
 
     });
+    */
 
 
 // INICIALIZACIÓN Y CARGA

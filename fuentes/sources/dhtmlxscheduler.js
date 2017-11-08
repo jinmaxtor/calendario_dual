@@ -4422,6 +4422,7 @@ scheduler.clearAll = function() {
 	this.clear_view();
 	this.callEvent("onClearAll", []);
 };
+
 scheduler.addEvent = function(start_date, end_date, text, id, extra_data) {
 	if (!arguments.length)
 		return this.addEventNow();
