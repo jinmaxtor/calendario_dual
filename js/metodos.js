@@ -68,7 +68,6 @@ function sacar_poner() {
             // si el evento es valido
             if(evento_atrapado.date){
 
-
                 var fecha = fecha_to_FechaStr(evento_atrapado.date);
                 var hora = fecha_to_HoraStr(evento_atrapado.date);
                 alert(fecha + " " + hora);
@@ -87,9 +86,9 @@ function sacar_poner() {
 
                 //se añade el evento al calendario
 
-                var id_evento = scheduler.addEvent(evento);
-                var eve = scheduler.getEvent(id_evento);
-                console.log(eve);
+                //var id_evento = scheduler.addEvent(evento);
+                //var eve = scheduler.getEvent(id_evento);
+                //console.log(eve);
                 //scheduler.showLightbox(evento.id);
                 //scheduler.endLightbox(false);
 
