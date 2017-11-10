@@ -86,9 +86,9 @@ function sacar_poner() {
 
                 //se añade el evento al calendario
 
-                //var id_evento = scheduler.addEvent(evento);
-                //var eve = scheduler.getEvent(id_evento);
-                //console.log(eve);
+                var id_evento = scheduler.addEvent(evento);
+                var eve = scheduler.getEvent(id_evento);
+                console.log(eve);
                 //scheduler.showLightbox(evento.id);
                 //scheduler.endLightbox(false);
 
@@ -102,7 +102,7 @@ function sacar_poner() {
     });
 }
 
-duracion = 120;
+duracion = 120; // duracion para el evento arrastrable
 
 function iniciarCalendario() {
 
