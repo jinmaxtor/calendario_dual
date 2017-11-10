@@ -57,11 +57,28 @@ function sacar_poner() {
     });
 
     $("#poner").droppable({
+        drop: function() {
+            alert("hola");
+            var evt = window.event || e;
+            alert(evt);
+            console.log(evt);
+        }
+    });
+
+    $("#poneres").droppable({
         accept: ".external-event",
         //tolerance: "intersect",
-        drop: function () {
-            var evento_atrapado = scheduler.getActionData(event),
-                node = event.target || event.srcElement;
+        drop: function (e) {
+            //alert(event);
+            alert("hola");
+
+            var evt = e ? e.target : window.event.srcElement;
+
+
+
+            alert(evt);
+            var evento_atrapado = scheduler.getActionData(evt),
+                node = evt.target || evt.srcElement;
 
 
 
@@ -133,55 +150,10 @@ function iniciarCalendario() {
 
     scheduler.attachEvent("onMouseMove", function(id, ev){
         var obj = scheduler.getActionData(ev);
-        console.log(obj.section)
+        //console.log(obj.section);
         document.getElementById('log').innerHTML = "Click at "+obj.date+"<br>section:"+obj.section;
     });
 
-
-    /*
-    scheduler.attachEvent("onTemplatesReady", function() {
-        var fix_date = function(date) {  // 17:48:56 -> 17:30:00
-            date = new Date(date);
-            if (date.getMinutes() > 30)
-                date.setMinutes(30);
-            else
-                date.setMinutes(0);
-            date.setSeconds(0);
-            return date;
-        };
-
-
-        //scheduler.attachEvent("onClick", function(id, e){scheduler.showLightbox(id);});
-
-        var marked = null;
-        var marked_date = null;
-        var event_step = 120;
-        scheduler.attachEvent("onEmptyClick", function(date, native_event){
-            scheduler.unmarkTimespan(marked);
-            marked = null;
-
-            var fixed_date = fix_date(date);
-            scheduler.addEventNow(fixed_date, scheduler.date.add(fixed_date, event_step, "minute"));
-        });
-
-        scheduler.attachEvent("onMouseMove", function(event_id, native_event) {
-            var date = scheduler.getActionData(native_event).date;
-            var fixed_date = fix_date(date);
-
-            if (+fixed_date != +marked_date) {
-                scheduler.unmarkTimespan(marked);
-
-                marked_date = fixed_date;
-                marked = scheduler.markTimespan({
-                    start_date: fixed_date,
-                    end_date: scheduler.date.add(fixed_date, event_step, "minute"),
-                    css: "highlighted_timespan"
-                });
-            }
-        });
-
-    });
-    */
 
 
 // INICIALIZACIÓN Y CARGA
