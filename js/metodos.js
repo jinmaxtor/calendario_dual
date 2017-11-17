@@ -230,6 +230,7 @@ function iniciarCalendario() {
 
 // INICIALIZACIÓN Y CARGA
     scheduler.init('calendario',new Date(2017,9,30),"week");// inicia el calendario
+
     scheduler.parse([
         {start_date: "2017-10-30 08:30", end_date: "2017-10-30 9:30", text: "Reunion importante by jin", details: "en la UAGRM", color: "red"},
         {start_date: "2017-10-30 09:00", end_date: "2017-10-30 10:00", text: "Junta de venta", details: "software", color: "green"},
@@ -237,5 +238,6 @@ function iniciarCalendario() {
         {start_date: "2017-10-30 12:00", end_date: "2017-10-30 13:30", text: "Desde el amanecer", details: "en la mañana"},
         {start_date: "2017-10-30 11:00", end_date: "2017-10-30 12:30", text: "Cumpleaños de Nicol", details: "evento realizado todo el año"}
     ], "json");
+
     //scheduler.load("./data/events.xml"); // carga los datos desde archivo
 }
