@@ -2,7 +2,7 @@ function init() {
     scheduler.config.xml_date = "%Y-%m-%d %H:%i";
     scheduler.init('calendario', new Date(2017,11,18), "week");
     scheduler.load("./data/events.xml");
-};
+}
 
 function retornarColor(nombreEvento) {
     var colores = ["#0176BC", "#627D4D", "#F7931E", "#2EBDEF", "#662D91", "#DB00C5"];
@@ -21,7 +21,6 @@ function retornarColor(nombreEvento) {
         case "CAMBIO VERSION": color = colores[5];
             break;
     }
-
     return color;
 }
 
@@ -56,40 +55,6 @@ function sacar_poner() {
         }
 
     });
-
-
-    /*
-    $("#poner").droppable({
-        drop: function() {
-            alert("hola");
-            var evt = window.event || e;
-            alert(evt);
-            console.log(evt);
-        }
-    });
-    */
-
-    /*
-    $("#ponedr").draggable({
-        stop: function( event, ui ) {
-            var drop = scheduler.getActionData(event),
-                node = event.target || event.srcElement;
-            //node is dropped on a valid scheduler date
-            if(drop.date){
-                //create new event
-                var ev = {
-                    text : node.innerHTML,
-                    start_date : drop.date,
-                    end_date : scheduler.date.add(drop.date, scheduler.config.time_step, 'minute')
-                };
-
-                //add it to the scheduler
-                scheduler.addEvent(ev);
-            }
-        }
-    });
-    */
-
 
     $("#poner").droppable({
         accept: ".external-event",
@@ -131,7 +96,6 @@ function sacar_poner() {
                 console.log(fecha);
                 console.log(hora);
             }
-
         }
     });
 
