@@ -32,18 +32,19 @@ function inicializar() {
     iniciarCalendario();
 }
 
-function fecha_to_FechaStr(date) {
+function fechaToFechaStr(date) {
     var fun = scheduler.date.date_to_str("%d/%m/%Y");
     return  fun(date);
 }
 
-function fecha_to_HoraStr(date) {
+function fechaToHoraStr(date) {
     var fun = scheduler.date.date_to_str("%H:%i:%s");
     return  fun(date);
 }
 
 function sacar_poner() {
-    $( ".external-event" ).draggable({
+
+    $(".external-event").draggable({
         //helper: "clone",
         //opacity: 0.35,
         stack: ".external-event",
@@ -56,6 +57,8 @@ function sacar_poner() {
 
     });
 
+
+    /*
     $("#poner").droppable({
         drop: function() {
             alert("hola");
@@ -64,23 +67,91 @@ function sacar_poner() {
             console.log(evt);
         }
     });
+    */
 
+    /*
+    $("#ponedr").draggable({
+        stop: function( event, ui ) {
+            var drop = scheduler.getActionData(event),
+                node = event.target || event.srcElement;
+            //node is dropped on a valid scheduler date
+            if(drop.date){
+                //create new event
+                var ev = {
+                    text : node.innerHTML,
+                    start_date : drop.date,
+                    end_date : scheduler.date.add(drop.date, scheduler.config.time_step, 'minute')
+                };
+
+                //add it to the scheduler
+                scheduler.addEvent(ev);
+            }
+        }
+    });
+    */
+
+
+    $("#poner").droppable({
+        accept: ".external-event",
+        drop: function (event, ui) {
+            var event = event.originalEvent;
+
+            var atrapado = scheduler.getActionData(event),
+                node = event.target || event.srcElement;
+
+            if (atrapado.date) {
+                var tipoEvento = node.innerHTML;
+                var fecha = fechaToFechaStr(atrapado.date);
+                var hora = fechaToHoraStr(atrapado.date);
+
+                alert(tipoEvento);
+                alert(fecha);
+                alert(hora);
+
+
+                // Se crea el evento en el calendario
+                var evento = {
+                    text : tipoEvento,
+                    start_date : atrapado.date,
+                    end_date : scheduler.date.add(atrapado.date, duracion, 'minute'),
+                    color: retornarColor(tipoEvento)
+                    //atributo1: valor1,
+                    //atributo2: valor2,
+                    //atributoN: valorN
+                };
+
+                //se añade el evento al calendario
+                var id_evento = scheduler.addEvent(evento);
+                var eve = scheduler.getEvent(id_evento);
+                console.log(eve);
+                //scheduler.showLightbox(evento.id);
+                //scheduler.endLightbox(false);
+
+                console.log(tipoEvento);
+                console.log(fecha);
+                console.log(hora);
+            }
+
+        }
+    });
+
+    /*
     $("#poneres").droppable({
         accept: ".external-event",
         //tolerance: "intersect",
-        drop: function (e) {
+        drop: function () {
             //alert(event);
             alert("hola");
 
-            var evt = e ? e.target : window.event.srcElement;
+            //var evt = e ? e.target : window.event.srcElement;
 
 
 
-            alert(evt);
-            var evento_atrapado = scheduler.getActionData(evt),
+            alert(event);
+            var evento_atrapado = scheduler.getActionData(event),
                 node = evt.target || evt.srcElement;
 
-
+            alert(evento_atrapado);
 
             // si el evento es valido
             if(evento_atrapado.date){
@@ -117,9 +188,10 @@ function sacar_poner() {
         }
 
     });
+    */
 }
 
-duracion = 120; // duracion para el evento arrastrable
+duracion = 120; // duracion para el evento arrastrable en minutos.
 
 function iniciarCalendario() {
 
