@@ -183,7 +183,7 @@ function iniciarCalendario() {
     scheduler.config.default_date = "%j %F %Y"; // define el formato de vista de la fecha.
 
 
-
+    // codigo para rastrear puntero
     scheduler.attachEvent("onMouseMove", function(id, ev){
         var obj = scheduler.getActionData(ev);
         //console.log(obj.section);
@@ -194,6 +194,7 @@ function iniciarCalendario() {
 
 // INICIALIZACIÓN Y CARGA
     scheduler.init('calendario',new Date(2017,9,30),"week");// inicia el calendario
+
 
     scheduler.parse([
         {start_date: "2017-10-30 08:30", end_date: "2017-10-30 9:30", text: "Reunion importante by jin", details: "en la UAGRM", color: "red"},

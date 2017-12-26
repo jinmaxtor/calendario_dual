@@ -2163,7 +2163,8 @@ scheduler.render_data = function (e, t) {
     var o = document.createElement("DIV"), h = e.id, _ = l ? "dhx_cal_event dhx_cal_select_menu" : "dhx_cal_event",
         c = scheduler.templates.event_class(e.start_date, e.end_date, e);
     c && (_ = _ + " " + c);
-    var u = e.color ? "background:" + e.color + ";" : "", g = e.textColor ? "color:" + e.textColor + ";" : "",
+    // Se cambio de background a background-color
+    var u = e.color ? "background-color:" + e.color + ";" : "", g = e.textColor ? "color:" + e.textColor + ";" : "",
         v = '<div event_id="' + h + '" class="' + _ + '" style="position:absolute; top:' + i + "px; left:" + t + "px; width:" + (a - 4) + "px; height:" + r + "px;" + (s || "") + '"></div>';
     o.innerHTML = v;
     var f = o.cloneNode(!0).firstChild;
